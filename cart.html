@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Keranjang</title>
+<style>
+body { font-family: Arial; background:#ffe6f0; }
+.container { padding:20px; }
+.item {
+    background:white;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+}
+button {
+    background:pink;
+    border:none;
+    padding:8px;
+    border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h2>Keranjang</h2>
+
+<div id="cartList"></div>
+
+<h3 id="total"></h3>
+
+<button onclick="checkout()">Checkout</button>
+<button onclick="back()">Kembali</button>
+
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function render(){
+    let html = "";
+    let total = 0;
+
+    cart.forEach((item, i)=>{
+        total += item.harga;
+        html += `
+        <div class="item">
+            ${item.nama} - Rp ${item.harga}
+            <button onclick="hapus(${i})">Hapus</button>
+        </div>`;
+    });
+
+    document.getElementById("cartList").innerHTML = html;
+    document.getElementById("total").innerText = "Total: Rp " + total;
+}
+
+function hapus(i){
+    cart.splice(i,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    render();
+}
+
+function checkout(){
+    window.location.href="checkout.html";
+}
+
+function back(){
+    window.location.href="index.html";
+}
+
+render();
+</script>
+
+</body>
+</html>

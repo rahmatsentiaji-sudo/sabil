@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Checkout</title>
+<style>
+body {
+    font-family: Arial;
+    background:#ffe6f0;
+    text-align:center;
+}
+.container {
+    padding:20px;
+}
+input, select {
+    width:80%;
+    padding:10px;
+    margin:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+button {
+    background:pink;
+    border:none;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+.confetti {
+    position:fixed;
+    width:10px;
+    height:10px;
+    background:red;
+    top:0;
+    animation: fall 3s linear infinite;
+}
+@keyframes fall {
+    to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h2>Checkout</h2>
+
+<input placeholder="Nama"><br>
+<input placeholder="Alamat"><br>
+
+<select>
+<option>Transfer Bank</option>
+<option>COD</option>
+<option>E-Wallet</option>
+</select><br>
+
+<button onclick="bayar()">Bayar</button>
+
+</div>
+
+<script>
+function bayar(){
+    for(let i=0;i<50;i++){
+        let conf = document.createElement("div");
+        conf.className="confetti";
+        conf.style.left = Math.random()*100+"%";
+        conf.style.background = ["pink","red","purple"][Math.floor(Math.random()*3)];
+        conf.style.animationDuration = (Math.random()*3+2)+"s";
+        document.body.appendChild(conf);
+    }
+
+    localStorage.removeItem("cart");
+    alert("Pembayaran berhasil!");
+}
+</script>
+
+</body>
+</html>
